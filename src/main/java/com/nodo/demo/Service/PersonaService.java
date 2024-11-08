@@ -4,6 +4,7 @@ import com.nodo.demo.Models.Personas;
 import com.nodo.demo.Models.Trabajo;
 import com.nodo.demo.Repositories.PersonaRepository;
 import com.nodo.demo.Repositories.TrabajoRepository;
+import com.nodo.demo.Utils.ValidadorDeCampo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +24,12 @@ public class PersonaService {
         Optional<Trabajo> optionalTrabajo = trabajoRepository.findByNombreTrabajo(persona.getTrabajo().getNombreTrabajo());
 
         Trabajo trabajo;
-        if (optionalTrabajo.isPresent()) {
-            trabajo = optionalTrabajo.get();
-        }else{
-            trabajo = new Trabajo();
-            trabajo.setNombreTrabajo(persona.getTrabajo().getNombreTrabajo());
-            trabajo = trabajoRepository.save(trabajo);
-        }
+        trabajo = ValidadorDeCampo.validateOrCreate(trabajoRepository,
+                optionalTrabajo,
+                () -> { Trabajo nuevoTrabajo = new Trabajo();
+                nuevoTrabajo.setNombreTrabajo(persona.getTrabajo().getNombreTrabajo());
+                return nuevoTrabajo;
+        });
 
         Personas personas = new Personas();
         personas.setNombre(persona.getNombre());

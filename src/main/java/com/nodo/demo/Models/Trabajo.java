@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @JsonSerialize
 public class Trabajo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
