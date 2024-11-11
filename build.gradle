@@ -35,6 +35,12 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-websocket:3.3.4'
 
+	// Dependencia de validación para usar anotaciones como @NotEmpty y @NotNull
+	implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+
+	// Dependencia para que Spring Boot valide automáticamente los DTOs con @Valid
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
